@@ -1,7 +1,7 @@
 <?php
 /* System Details */
 define('MULTILANG', true);
-define('LANGS', array('az', 'en', 'ru'));
+define('LANGS', array('az', 'en', 'hu', 'ru'));
 define('SITE_LINK', 'http://localhost/mvc_git/');
 define('SITE_PATH', '/mvc_git');// default "" else "/folder_name" /* for import files */
 define('CONTROL_PANEL', 'admin');
