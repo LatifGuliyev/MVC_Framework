@@ -120,8 +120,10 @@ try{
 	}
 }catch(Exception $ex){
     Logger::log($ex, 'INDEX ERROR ');
-    (new View())->viewDoc(array('visitor/not_found'));
-    Notifications::notify('Error', 'May be you do not have permission for that page', 'error', false);
+    echo "<br>Error Caught:"."<br>";
+    echo "File Name: {$ex->getFile()}<br>";
+    echo "Line Number: {$ex->getLine()}<br>";
+    echo "Message: {$ex->getMessage()}<br>"; 
     die();
 }
 /*

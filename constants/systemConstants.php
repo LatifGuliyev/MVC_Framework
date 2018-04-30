@@ -1,16 +1,16 @@
 <?php
 /* System Details */
 define('MULTILANG', true);
-define('LANGS', array('az', 'en', 'fr'));
-define('SITE_LINK', 'http://localhost/mvc/');
-define('SITE_PATH', '/mvc');// default "" else "/folder_name" /* for import files */
+define('LANGS', array('az', 'en', 'ru'));
+define('SITE_LINK', 'http://localhost/mvc_git/');
+define('SITE_PATH', '/mvc_git');// default "" else "/folder_name" /* for import files */
 define('CONTROL_PANEL', 'admin');
 define('PLUGIN_DIR', SITE_PATH.'/plugins');
 define('EXE_DIR', SITE_PATH.'/exe');
 define('DEFAULT_LANG', 'en');
 define('ERROR_LOG_DIR', 'error_log/'); // error_log file dir
 
-define('CACHE_DURATION', 0);// in seconds
+define('CACHE_DURATION', 30);// in seconds
 
 define('BOOKMARKS_TIME', 0); // in seconds
 /* ./System Details */

@@ -3,13 +3,13 @@ class View {
 	private function template($c) {
 		$c = str_replace(
 				array('{{', '}}', '{!', '!}', '{[', ']}', '@{', '@}'),
-				array('<?=', '?>','<?=htmlspecialchars(', ')?>', '<?=$lang(\'', '\')?>', '<?php ', ' ?>'), $c);
+				array('<?php echo ', ';?>','<?=htmlspecialchars(', ');?>', '<?=$lang(\'', '\');?>', '<?php ', ' ?>'), $c);
 		return $c;
 	}
 
 	public function viewDocMem(array $files, array $data = array(), $view_dir = './view/') {
 		$time = CACHE_DURATION;
-		$name = 'cache/' . md5(end($files)) . '.html.php';
+		$name = 'cache/' . md5(end($files).$_SESSION["SELECTED_LANG"]) . '.html.php';
 		if (!file_exists($name) || time() - $time > filemtime($name)) {
 			$exp = "Expires: ".  gmdate("D, d M Y H:i:s", time()+$time)." GMT";
 			$c = '';
@@ -29,15 +29,21 @@ class View {
 							$lang = function($m) use($_lang){return isset($_lang[trim($m)]) ? $_lang[trim($m)] : $m;};
 						?>
 						';
-			if ($data) {
+			/*if ($data) {
 				foreach ($data as $key => $val) {
 					$$key = $val;
 				}
-			}
+			}*/
+            
+			
+            ob_start();
 			eval("?> $php$c <?php ");
-			file_put_contents($name, $php . $c);
+            $c = ob_get_clean();
+            echo $c;
+            file_put_contents($name,$c);
 		} else {
-			$content = file_get_contents($name);
+            extract($data, EXTR_SKIP);
+            $content = file_get_contents($name);
 			eval("?>$content<?php ");
 		}
 	}
@@ -52,11 +58,11 @@ class View {
 		$c = ob_get_clean();
 		$c = self::template($c);
 
-		if ($data) {
+		/*if ($data) {
 			foreach ($data as $key => $val) {
 				$$key = $val;
 			}
-		}
+		}*/
 
 		if($add_header){
 			$php = '<?php
